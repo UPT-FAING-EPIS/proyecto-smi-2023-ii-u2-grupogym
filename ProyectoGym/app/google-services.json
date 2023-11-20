@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561566791965",
+    "project_id": "bdgym-c32fb",
+    "storage_bucket": "bdgym-c32fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561566791965:android:ab96f76f3572e87c8649f4",
+        "android_client_info": {
+          "package_name": "com.example.proyectogym"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYk31erD-UU2a3-HZrybDsxIqAtaY6g2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
