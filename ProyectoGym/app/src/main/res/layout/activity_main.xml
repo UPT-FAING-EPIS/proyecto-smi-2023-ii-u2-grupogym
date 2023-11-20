@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fafafa"
-    tools:context=".Views.Admin.HomeActivity">
+    tools:context=".Views.Usuario.MainActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -47,9 +47,10 @@
                             android:id="@+id/textDashboard"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Dashboard"
+                            android:text="Ejercicios en Casa"
                             android:textColor="#fafafa"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
+                            android:layout_marginTop="20dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -71,15 +72,6 @@
                     </ImageView>
                 </LinearLayout>
             </RelativeLayout>
-
-
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/app_theme"
-                android:text="Agregar categoría" />
 
             <TextView
                 android:id="@+id/categoryPrincipiante"
@@ -139,7 +131,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"
+        app:menu="@menu/menu_usuario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -1,54 +1,43 @@
-package com.example.proyectogym.Views.Admin
+package com.example.proyectogym.Views.Usuario
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Typeface
-import android.graphics.drawable.BitmapDrawable
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectogym.Controllers.CategoriaController
 import com.example.proyectogym.Models.Categoria
 import com.example.proyectogym.R
+import com.example.proyectogym.Views.Admin.HomeActivity
+import com.example.proyectogym.Views.Admin.ListEjerciciosActivity
+import com.example.proyectogym.Views.Admin.PerfilAdminActivity
+import com.example.proyectogym.Views.Admin.ZonaActivity
 import com.example.proyectogym.Views.UserSingleton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import java.io.ByteArrayOutputStream
-import java.util.UUID
 
-class HomeActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var addButton: Button
-    private lateinit var imagenImageView: ImageView
     private val categoriaController = CategoriaController()
     private lateinit var listaDeCategorias: MutableList<Categoria>
-    private val PICK_IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         // Obtener categorías antes de inflar la vista
         obtenerCategorias { categorias ->
             listaDeCategorias = categorias.toMutableList()
-            setContentView(R.layout.activity_home)
-            addButton = findViewById(R.id.buttonAdd)
+            setContentView(R.layout.activity_main)
 
             val user = UserSingleton.getInstance()
             setup(user.correo ?: "")
-
-            addButton.setOnClickListener {
-                showPopup()
-            }
 
             listaDeCategorias = listaDeCategorias.distinctBy { it.imagen }.toMutableList()
 
@@ -111,14 +100,14 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
 
-                imageView.setOnClickListener {
+                /*imageView.setOnClickListener {
                     val intent = Intent(this, ListEjerciciosActivity::class.java)
 
                     intent.putExtra("imagenUrl", imagenUrl)
                     intent.putExtra("textoCategoria", nombre)
 
                     startActivity(intent)
-                }
+                }*/
             }
 
             val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -179,91 +168,4 @@ class HomeActivity : AppCompatActivity() {
         return (dp * scale + 0.5f).toInt()
     }
 
-    private fun showPopup() {
-
-        val builder = AlertDialog.Builder(this)
-        val inflater = LayoutInflater.from(this)
-        val dialogView = inflater.inflate(R.layout.popup_layout, null)
-        builder.setView(dialogView)
-
-        val nombreEditText = dialogView.findViewById<EditText>(R.id.nombreCategoriaEditText)
-        val cboNivel = dialogView.findViewById<Spinner>(R.id.cboNivelCategoria)
-        imagenImageView = dialogView.findViewById(R.id.imagenImageView)
-        val seleccionarImagenButton = dialogView.findViewById<Button>(R.id.seleccionarImagenButton)
-
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        builder.setPositiveButton("Guardar") { dialog, _ ->
-            val nombre = nombreEditText.text.toString()
-            val nivel = cboNivel.selectedItem.toString()
-
-            val storage = FirebaseStorage.getInstance()
-            val storageRef = storage.reference
-
-            val imagenBitmap = (imagenImageView.drawable as BitmapDrawable).bitmap
-
-            val nombreImagen = UUID.randomUUID().toString() + ".jpg"
-
-            // Ruta en Firebase Storage donde deseas guardar la imagen
-            val pathEnStorage = "categoria/$nombreImagen"
-
-            // Referencia al archivo en Firebase Storage
-            val imagenRef = storageRef.child(pathEnStorage)
-
-            // Sube la imagen a Firebase Storage
-            val baos = ByteArrayOutputStream()
-            imagenBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val data = baos.toByteArray()
-
-            val uploadTask = imagenRef.putBytes(data)
-
-            uploadTask.addOnSuccessListener { taskSnapshot ->
-                val nuevaCategoria = Categoria(
-                    nombre, nivel, nombreImagen
-                )
-                categoriaController.agregarCategoria(nuevaCategoria) { exito ->
-                    if (exito) {
-                        Toast.makeText(
-                            this,
-                            "Categoría registrada con éxito",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            "Error al registrar la Categoría",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }.addOnFailureListener { exception ->
-                Toast.makeText(
-                    this,
-                    "Error al registrar la Categoría",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            dialog.dismiss()
-        }
-
-        val dialog = builder.create()
-        dialog.show()
-
-        seleccionarImagenButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
-            val imageUri = data?.data
-            imagenImageView.setImageURI(imageUri)
-        }
-    }
 }

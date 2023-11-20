@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fafafa"
-    tools:context=".Views.Admin.HomeActivity">
+    tools:context=".Views.Admin.ZonaActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -21,15 +21,13 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
-
             <RelativeLayout
                 android:id="@+id/topArea"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:background="@drawable/header_bg"
                 android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                >
+                android:paddingEnd="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -47,13 +45,13 @@
                             android:id="@+id/textDashboard"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Dashboard"
+                            android:text="Zonas"
                             android:textColor="#fafafa"
                             android:textSize="30sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/textNombreApellido"
+                            android:id="@+id/textNombreApellidoZonas"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Bienvenido, nombre apellidos"
@@ -72,69 +70,16 @@
                 </LinearLayout>
             </RelativeLayout>
 
-
             <Button
-                android:id="@+id/buttonAdd"
+                android:id="@+id/buttonAddZonas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:backgroundTint="@color/app_theme"
-                android:text="Agregar categoría" />
-
-            <TextView
-                android:id="@+id/categoryPrincipiante"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="PRINCIPIANTE"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/principianteContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
-
-            <TextView
-                android:id="@+id/categoryIntermedio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="INTERMEDIO"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/intermedioContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
-
-
-            <TextView
-                android:id="@+id/categoryAvanzado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="AVANZADO"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/avanzadoContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
-
+                android:text="Agregar Zonas" />
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"

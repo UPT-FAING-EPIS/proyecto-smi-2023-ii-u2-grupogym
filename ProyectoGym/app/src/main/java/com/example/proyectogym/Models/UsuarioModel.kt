@@ -4,12 +4,17 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 data class Usuario(
-    val correo: String,
-    val nombre: String,
-    val apellido: String,
-    val contrasenia: String,
-    val sexo: String,
-    val tipoUsuario: Int
+    val correo: String = "",
+    val nombre: String = "",
+    val apellido: String = "",
+    val contrasenia: String = "",
+    val sexo: String = "",
+    val tipoUsuario: Int = 0,
+    val peso: String = "",
+    val talla: String = "",
+    val zona: String = "",
+    val objetivo: String = "",
+    val nivel: String = ""
 )
 
 
